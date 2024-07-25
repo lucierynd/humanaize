@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanAIze</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for custom dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content div {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content div:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown.show .dropdown-content {
+            display: block;
+        }
+
+        /* Additional CSS for chatbot */
+        .chat-container {
+            width: 100%;
+            border: 1px solid var(--themeColor);
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            width: 93%;
+
+        }
+
+        .messages {
+            height: 200px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            margin-bottom: 5px;
+        }
+
+        .user-message {
+            text-align: right;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+        .input-container input[type="text"] {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .input-container button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--themeColor);
+            color: white;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #33993a;
+        }
+
+        .loading {
+            text-align: center;
+        }
+
+        .spinner {
+            display: inline-block;
+            margin-left: 10px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- InfyMe Logo -->
+        <div class="logo-title">
+            <!-- Application Logo -->
+            <div class="logo">
+                <a href="https://example.com" target="_blank">
+                    <img src="https://infyme.infosysapps.com/en/assets/images/InfyMe_Logo.png" alt="Logo">
+                </a>
+            </div>
+        </div>
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search for Apps and a lot">
+            <button type="button"><img src="images/microphone.png" alt="Microphone" style="height: 16px; width: 10px;"></button>
+            <button type="submit"><img src="images/loupe.png" alt="Search" style="height: 16px; width: 16px;"></button>
+        </div>
+        <!-- Navigation Links and Icons -->
+        <div class="nav-icons">
+            <a href="https://example.com/web-apps-services" target="_blank">Web Apps/Services</a>
+            <div class="icons">
+                <img src="images/interrochat.png" alt="Help" style="height: 25px; width: 25px;">
+                <img src="images/notification.png" alt="Notifications" style="height: 25px; width: 22px;">
+                <a href="https://example.com/profile" target="_blank">
+                    <img src="images/profile.png" alt="Profile" style="height: 40px; width: 45px;">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="left-column">
+            <section class="weekly-highlights-title" style="position: relative;">
+                <div class="dropdown" id="dropdownMenu">
+                    <h2 id="highlights-title" onclick="toggleDropdown()">Highlights of the week</h2>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <div onclick="changeHighlights('week')">Highlights of the week</div>
+                        <div onclick="changeHighlights('day')">Highlights of the day</div>
+                        <div onclick="changeHighlights('month')">Highlights of the month</div>
+                        <div onclick="changeHighlights('year')">Highlights of the year</div>
+                    </div>
+                </div>
+                <button id="addHighlightButton" onclick="addHighlight()">+</button>
+            </section>
+            <!-- Weekly Highlights Information -->
+            <section class="weekly-highlights-info">
+                <ul id="highlights-info">
+                    <button id="addHighlightButton" onclick="addHighlight()">+</button>
+
+                    <li>
+                        <button class="highlight-button" onclick="highlightButtonClick()">Luca goes on holidays</button>
+                    </li>
+                    <li>Charles P., Jennifier O., Liza T. are joining your yeam</li>
+                    <li>Sofia Palini is celebrating 2 years at Infosys</li>
+                    <li>Major product launch event</li>
+                    <li>Ankit is on week 2 of onboarding</li>
+                    <li>Suzan is signing an big contract with a client</li>
+                </ul>
+            </section>
+
+            <!-- Suggestions Title -->
+            <section class="suggestions-title">
+                <h2>Suggestions</h2>
+            </section>
+
+            <!-- Suggestions details -->
+            <section class="suggestions">
+                <div class="suggestion">
+                    <h3>Sofa Palini is celebrating two years at Infosys.</h3>
+                    <p>Do you want to organize an event?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Sofia Palini is celebrating two years at Infosys. Do you want to organize an event?', 'Are you sure you want to organize an event and add this event to team calendar?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>It has been a while you haven't talked with Luca</h3>
+                    <p>Do you want me to schedule a 1-on-1 meeting?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Schedule a work plan call with Luca', 'Are you sure you want to schedule a work plan call with Luca?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>Quarterly Performance Review</h3>
+                    <p>It's time for the quarterly performance reviews. Do you want to schedule review meetings?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Quarterly Performance Review', 'Are you sure you want to schedule review meetings?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>Sofia is starting a new job and managing a team for the first time</h3>
+                    <p>Do you want me to suggest her trainings on management?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Send training suggestions to Suzan', 'Are you sure you want to send training suggestions to Suzan?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>Lucie is going on holidays for 2 weeks</h3>
+                    <p>Would you like to schedule a meeting to ease her transition back to work?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Back from holiday meeting', 'Are you sure you want to schedule this meeting?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>A new employee is joining the team</h3>
+                    <p>Do you want to organize an orientation session?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('New employee orientation', 'Are you sure you want to organize an orientation session?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>Maria is leaving the company next week.</h3>
+                    <p>Do you want to plan a farewell party?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Maria farewell party', 'Are you sure you want to organize a farewell party for Maria?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>Project Milestone Celebration</h3>
+                    <p>Our team has achieved a major project milestone. Do you want to celebrate this achievement?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Project Milestone Celebration', 'Are you sure you want toto celebrate this achievement?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <h3>Training Session for New Software</h3>
+                    <p>A new software update is available. Do you want to schedule a training session for the team?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Training Session for New Software', 'Are you sure you want to schedule a training session for the team?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                </section>
+
+
+               <!-- New suggestions added, initially hidden -->
+                <div class="suggestion hidden" id="newSuggestion">
+                    <h3>Annual Budget Planning</h3>
+                    <p>It's time for annual budget planning. Do you want to set up a meeting with the finance team?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Annual budget planning', 'Are you sure you want to set up a meeting with the finance team?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion hidden" id="newSuggestion2">
+                    <h3>Recognition for Top Performers</h3>
+                    <p>Let's recognize our top performers of the month. Do you want suggestions on who to congralulate?</p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Recognition for Top Performers', 'Are you sure you want to plan a recognition event?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                <div class="suggestion hidden" id="newSuggestion3">
+                    <h3>Paul has been sick for 4 days</h3>
+                    <p>Would you like to organize a support plan for his return? </p>
+                    <div class="buttons">
+                        <button class="yes-button" onclick="confirmAddEvent('Paul is on medical leave', 'Are you sure you want to organize a support plan for his return?', this)">Yes</button>
+                        <button class="no-button" onclick="replaceSuggestion(this)">No</button>
+                    </div>
+                </div>
+                
+
+            </section>
+        </div>
+
+        <div class="right-column">
+            <!-- Calendar -->
+            <section class="calendar" style="position: relative;">
+                <h2>Calendar</h2>
+                <p>Daily/weekly/monthly view of events.</p>
+                <div class="zoom-controls">
+                    <button onclick="zoomIn()">Zoom In</button>
+                    <button onclick="zoomOut()">Zoom Out</button>
+                </div>
+                <iframe src="https://outlook.office365.com/owa/calendar/79d232dec1c449fcb2ce7e2e1bff07f1@student.ethz.ch/807684d55aa04235bb604d1b3e4957ba7255295515070176421/calendar.html" style="border: 0; width: 100%; height: 500px;" frameborder="0" scrolling="yes"></iframe>
+            </section>
+        
+            <!-- Chatbot Section -->
+            <section class="chat-container">
+                <div class="messages" id="messages"></div>
+                <div class="input-container">
+                    <input type="text" id="userInput" placeholder="Ask HumAIn for advice">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+
+    <script>
+
+        let currentSuggestionIndex = 0;
+        const suggestions = ["newSuggestion", "newSuggestion2", "newSuggestion3"];
+
+        function confirmAddEvent(eventDescription, confirmationMessage, button) {
+            const userConfirmed = confirm(confirmationMessage);
+            if (userConfirmed) {
+                addEventToCalendar(eventDescription);
+                replaceSuggestion(button); // Replace the suggestion after confirmation
+            }
+        }
+
+        function addEventToCalendar(eventDescription) {
+            // Add here the code to link it to the Microsoft API
+        }
+
+        function replaceSuggestion(button) {
+            const parentSuggestion = button.closest('.suggestion');
+            const newSuggestionId = suggestions[currentSuggestionIndex];
+            const newSuggestion = document.getElementById(newSuggestionId);
+            
+            parentSuggestion.innerHTML = newSuggestion.innerHTML;
+            
+            // Update the index for the next suggestion
+            currentSuggestionIndex = (currentSuggestionIndex + 1) % suggestions.length;
+        }
+
+        function highlightButtonClick() {
+            alert("Button clicked! Implement your desired functionality here.");
+        }
+
+        function addHighlight() {
+            const newHighlight = prompt("Enter the new highlight:");
+            if (newHighlight) {
+                const highlightsInfo = document.getElementById('highlights-info');
+                const newHighlightItem = document.createElement('li');
+                newHighlightItem.textContent = newHighlight;
+                highlightsInfo.appendChild(newHighlightItem);
+            }
+        }
+
+        async function sendMessage() {
+            const userInputElement = document.getElementById('userInput');
+            const userInput = userInputElement.value;
+            if (!userInput) return;
+
+            addMessage('You: ' + userInput, 'user-message');
+
+            // Clear the input field immediately after retrieving its value
+            userInputElement.value = '';
+
+            // Show the loading spinner in the chat
+            const loadingMessage = addMessage('HumAIn is typing...', 'loading');
+            const spinner = document.createElement('div');
+            spinner.className = 'spinner';
+            loadingMessage.appendChild(spinner);
+
+            const response = await fetch('http://127.0.0.1:5000/send-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            // Remove the loading message
+            loadingMessage.remove();
+
+            const data = await response.json();
+            addMessage('HumAIn: ' + data.message, 'bot-message');
+        }
+
+        function addMessage(text, className) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + className;
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return messageDiv;
+        }
+
+        let zoomLevel = 1;
+        
+        const highlightsData = {
+            week: [
+                "Charles P., Jennifier O., Liza T. are joining your yeam",
+                "Sofia Palini is celebrating 2 years at Infosys",
+                "Major product launch event",
+                "George Paul is due to complete his project",
+                "Ankit is on week 2 of onboarding",
+                "Suzan is signing an big contract with a client",
+                "Weekly training or skill development session."
+
+            ],
+            day: [
+                "It's Luca's Birthday today",
+                "It's Michal Jo's last day in the company",
+                "Lunch with Coca Cola to finalize the deal",
+                "Suzan just gave birth to her second child",
+                "Check on the team morale",
+                "Sending daily reports to upper management"
+            ],
+            month: [
+                "Project deadline approaching",
+                "Team outing scheduled",
+                "Monthly budget and expense review",
+                "Michal Jo is retiring next month",
+                "Client feedback session",
+                "New project kickoff",
+                "Celebrating employee work anniversaries"
+            ],
+            year: [
+                "Celebrate the company's anniversary.",
+                "Year-end performance reviews",
+                "Holiday party planning",
+                "Annual client appreciation day",
+                "Budget planning for next year",
+                "Employee recognition awards",
+                "Annual performance review meetings"
+            ]
+        };
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('show');
+        }
+
+        function changeHighlights(period) {
+            const highlightsInfo = document.getElementById('highlights-info');
+            const title = document.getElementById('highlights-title');
+
+            title.textContent = `Highlights of the ${period}`;
+            const items = highlightsData[period].map(item => `<li>${item}</li>`).join('');
+            highlightsInfo.innerHTML = `<ul>${items}</ul>`;
+
+            // Hide the dropdown after selection
+            toggleDropdown();
+        }
+
+        // Initialize with weekly highlights
+        document.addEventListener('DOMContentLoaded', () => {
+            changeHighlights('week');
+        });
+    </script>
+
+</body>
+</html>

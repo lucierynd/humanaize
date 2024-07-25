@@ -1,0 +1,30 @@
+
+
+{
+    "employee_data": {
+    "employee_id": "67890",
+    "name": "Jane Smith",
+    "starting_date": "2018-03-10",
+    "last_raise_date": "2023-05-15",
+    "role": "Project Manager",
+    "average_tenure": "4 years",
+    "previous_roles": ["Junior Project Manager", "Project Coordinator"],
+    "completed_projects": ["Project X", "Project Y"],
+    "skills": ["Project Management", "Agile Methodologies", "Team Leadership"],
+    "past_performance_reviews": [
+      {"date": "2021-12-31", "rating": "5"},
+      {"date": "2022-12-31", "rating": "4"}
+    ],
+    "past_completed_trainings": ["Agile Project Management", "Leadership Development"],
+    "past_achievements": ["Best Project Manager Award", "Excellence in Leadership Award"]
+    },
+    "triggering_event": {
+      "type": "Upcoming birthday",
+      "details": {
+        "additional informations": "36 years in one week",
+        "date": "2024-07-20"
+      }
+    }
+}
+  
+  

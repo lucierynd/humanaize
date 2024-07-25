@@ -1,0 +1,27 @@
+{
+    "employee_data": {
+      "employee_id": "12345",
+      "name": "John Doe",
+      "starting_date": "2020-01-15",
+      "last_raise_date": "2023-01-15",
+      "role": "Software Engineer",
+      "average_tenure": "5 years",
+      "previous_roles": ["Junior Developer", "Developer"],
+      "completed_projects": ["Project A", "Project B"],
+      "skills": ["Python", "JavaScript", "Machine Learning"],
+      "past_performance_reviews": [
+        {"date": "2021-12-31", "rating": "4"},
+        {"date": "2022-12-31", "rating": "5"}
+      ],
+      "past_completed_trainings": ["Advanced Python", "Machine Learning Basics"],
+      "past_achievements": ["Employee of the Month", "Innovation Award"]
+    },
+    "triggering_event": {
+      "type": "new_achievement",
+      "details": {
+        "achievement": "Completed Machine Learning Project",
+        "date": "2024-07-20"
+      }
+    }
+  }
+  

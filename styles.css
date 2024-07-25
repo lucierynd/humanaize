@@ -1,0 +1,427 @@
+/* Declaration of global style variables */
+:root {
+    --themeColor: #406BBF;
+    --searchBarColor: #FFFFFF;
+    --iconColor: #FFFFFF;
+    --textColor: #FFFFFF;
+    --highlightColor: #F4F4F4;
+    --backgroundColor: #E0E0E0;
+}
+
+/* Basic styles for resetting margins and paddings */
+body, h1, h2, h3, p, ul, li, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--backgroundColor);
+}
+
+/* Styles for the main header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--themeColor);
+    color: var(--textColor);
+    padding: 10px 20px;
+}
+
+/* Styles for the logo and title section */
+.logo-title {
+    display: flex;
+    align-items: center;
+}
+
+/* Styles for the logo */
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Styles for the search bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--searchBarColor);
+    border-radius: 5px;
+    padding: 5px;
+    flex-grow: 1;
+    max-width: 600px;
+    margin: 0 20px;
+}
+
+/* Styles for the search input */
+.search-bar input {
+    border: none;
+    padding: 5px;
+    outline: none;
+    flex-grow: 1;
+}
+
+/* Styles for the search buttons */
+.search-bar button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 7px;
+    margin-right: 5px; /* Negative margin to shift icons left */
+}
+
+.search-bar button img {
+    height: 24px;
+    width: 24px;
+}
+
+/* Styles for the navigation icons */
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons a {
+    color: var(--textColor);
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 16px;
+    line-height: 30px; /* Ensures vertical alignment with icons */
+}
+
+.nav-icons .icons img {
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+    vertical-align: middle; /* Ensures vertical alignment with text */
+
+}
+
+/* Styles for the main content */
+.main-content {
+    display: flex;
+    padding: 20px;
+}
+
+/* Styles for the columns */
+.left-column, .right-column {
+    flex: 1;
+    margin: 10px;
+}
+
+/* Styles for the section titles */
+.weekly-highlights-title, .weekly-highlights-info, .calendar, .suggestions, .suggestions-title {
+    background-color: var(--highlightColor);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific styles for titles */
+.weekly-highlights-title, .suggestions-title {
+    background-color: #ffffff;
+    border: 1px solid var(--themeColor);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Adding transition for animation */
+}
+
+.weekly-highlights-title:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    background-color: #E0DFE2; /* Color change on hover */
+}
+
+/* Styles for Weekly Highlights information */
+.weekly-highlights-info {
+    max-height: 200px;
+    overflow-y: scroll;
+    border: 1px solid var(--themeColor); /* Blue border */
+
+}
+
+.weekly-highlights-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.weekly-highlights-info li {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adding transition for animation */
+    
+}
+
+.weekly-highlights-info li:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+
+/* Styles for the Suggestions section */
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px; /* Adding gap between suggestions */
+    max-height: 435px; /* Setting a maximum height for the section */
+    overflow-y: auto; /* Adding vertical scrollbar */
+    border: 1px solid var(--themeColor); /* Blue border */
+
+}
+
+.suggestion {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Increasing radius for rounder corners */
+    padding: 20px; /* Increasing padding for more space */
+    flex: 1 1 calc(33.333% - 20px); /* Calculation for three suggestions per row with spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increasing shadow for depth effect */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adding transition for animation */
+}
+
+.suggestion:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.suggestion h3 {
+    font-size: 18px;
+    margin-bottom: 10px; /* Increasing spacing below the title */
+}
+
+.suggestion p {
+    font-size: 14px;
+    margin-bottom: 10px; /* Increasing spacing below the paragraph */
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.yes-button, .no-button {
+    padding: 10px 15px; /* Increasing padding for comfort */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    flex: 1; /* Taking up full available width */
+    max-width: 50px; /* Setting a maximum length */
+}
+
+.yes-button {
+    background-color: #406BBF;
+    color: white;
+}
+
+.no-button {
+    background-color: #406BBF; /* Changing color for "No" button */
+    color: white;
+}
+
+.yes-button:hover {
+    background-color: #33993a; /* Color change on hover */
+}
+
+.no-button:hover {
+    background-color: #E04133; /* Color change on hover */
+}
+
+/* Additional CSS for button highlight */
+.highlight-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    cursor: pointer;
+}
+
+.highlight-button:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styles for the zoom controls */
+.zoom-controls {
+    position: absolute;
+    top: 10px; /* Adjusted for proper placement */
+    right: 10px; /* Adjusted for proper placement */
+    z-index: 1; /* Ensuring it stays on top */
+}
+
+.zoom-controls button {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding for space */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adding transition for animation */
+    font-size: 14px; /* Font size */
+    color: #406BBF; /* Theme color for text */
+    margin: 5px; /* Margin for spacing */
+}
+
+.zoom-controls button:hover {
+    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect on hover */
+    background-color: #f1f1f1; /* Light background on hover */
+}
+
+/* Hide initially */
+.hidden {
+    display: none;
+}
+
+
+/* Styles for the "+" button */
+#addHighlightButton {
+    background-color: var(--themeColor);
+    color: var(--textColor);
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute; 
+    top: 80px; 
+    right: 10px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#addHighlightButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #33993a; /* Change background color on hover */
+}
+
+/* Adjust the calendar section size */
+.calendar {
+    background-color: #ffffff;
+    border: 1px solid var(--themeColor);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust the calendar section size */
+.calendar {
+    background-color: #ffffff;
+    border: 1px solid var(--themeColor);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 93%;
+
+}
+
+/* Styles for the notes section */
+.notes {
+    background-color: #ffffff;
+    border: 1px solid var(--themeColor);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #f1f1f1(0, 0, 0, 0.1);
+}
+
+.notes h2 {
+    margin-bottom: 10px;
+}
+
+#notesTextarea {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    box-shadow: inset 0 2px 4px #f1f1f1(0, 0, 0, 0.03);
+    resize: vertical;
+    box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
+}
+
+/* Custom scrollbar for WebKit browsers */
+.weekly-highlights-info::-webkit-scrollbar,
+.suggestions::-webkit-scrollbar {
+    width: 6px; /* Reduce width to make it narrower */
+}
+
+.weekly-highlights-info::-webkit-scrollbar-track,
+.suggestions::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px; /* Round corners for the track */
+}
+
+.weekly-highlights-info::-webkit-scrollbar-thumb,
+.suggestions::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px; /* Round corners for the thumb */
+    height: 100px; /* Reduce length of the scrollbar thumb */
+    margin-top: 100px; /* Add margin at the top to shorten the scrollbar */
+    margin-bottom: 100px; /* Add margin at the bottom to shorten the scrollbar */
+}
+
+.weekly-highlights-info::-webkit-scrollbar-thumb:hover,
+.suggestions::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.hidden {
+    display: none;
+}
+
+.chat-container {
+    width: 100%; /* Aligner la largeur avec le calendrier */
+    background-color: #ffffff; /* Fond blanc comme le calendrier */
+    border: 4px solid var(--themeColor); /* Bordure bleue comme le calendrier */
+    padding: 20px; /* Même padding que le calendrier */
+    margin: 10px 0; /* Même marge que le calendrier */
+    border-radius: 10px; /* Même rayon de bordure que le calendrier */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Même ombre que le calendrier */
+}
+
+/* Styles pour les messages utilisateur */
+.message.user-message {
+    border: 1px solid var(--themeColor);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #e6f0ff; /* Light blue background */
+    text-align: right;
+    width: fit-content;
+    margin-left: auto;
+}
+
+/* Styles pour les messages du bot */
+.message.bot-message {
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f0f8ff; /* Very light blue background */
+    width: fit-content;
+    margin-right: auto;
+}
